@@ -1,0 +1,40 @@
+<script>
+    const noBtn = document.getElementById('noBtn');
+
+    function moveButton() {
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
+
+        const margin = 20;
+
+        const maxX = window.innerWidth - btnWidth - margin;
+        const maxY = window.innerHeight - btnHeight - margin;
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        noBtn.style.position = 'fixed';
+        noBtn.style.left = `${Math.max(margin, randomX)}px`;
+        noBtn.style.top = `${Math.max(margin, randomY)}px`;
+    }
+
+    noBtn.addEventListener('mouseenter', moveButton);
+    noBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        moveButton();
+    });
+
+    function celebrate() {
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#ff4d6d', '#ff758f', '#ffffff']
+        });
+
+        document.getElementById('main-card').style.display = 'none';
+        document.getElementById('letter').style.display = 'block';
+        document.body.style.backgroundColor = '#f8edeb';
+        window.scrollTo(0, 0);
+    }
+</script>
